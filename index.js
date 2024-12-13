@@ -1,24 +1,26 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("./models/product.model.js");
 const productRoute = require("./routes/products.route.js");
-const app = express();
+const authRoute = require("./routes/auth.route.js");
 const cors = require("cors");
-const PORT = 3000;
 
-const uri =
-  "mongodb+srv://developerbola08:He2bCFddzX84TIR6@backenddb.dgv8u.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB";
-// middleware
+const app = express();
+const PORT = process.env.PORT;
+const uri = process.env.MONGO_URI;
+
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// routes
-app.use("/api/products", productRoute);
+// Routes
+app.use("/api/users", authRoute); // Protected product routes
+app.use("/api/products", productRoute); // Protected product routes
 
-
+// Database Connection
 mongoose
-  .connect(uri)
+  .connect(uri, { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {
@@ -26,5 +28,8 @@ mongoose
     });
   })
   .catch((err) => {
-    console.log("Error connecting to MongoDB: " + err.message || err);
+    console.error("Error connecting to MongoDB: " + err.message || err);
+    console.error(
+      "Ensure your IP is whitelisted and your connection string is correct."
+    );
   });
