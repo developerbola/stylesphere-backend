@@ -20,7 +20,7 @@ app.use("/api/products", productRoute); // Protected product routes
 
 // Database Connection
 mongoose
-  .connect(uri, { useNewUrlParser: true })
+  .connect(uri)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {

@@ -8,6 +8,10 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: [true, "User password is required"],
     },
+    cart: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,
