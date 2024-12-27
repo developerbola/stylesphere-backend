@@ -111,7 +111,6 @@ const addProductToUserCart = async (req, res) => {
 
     // Check if user exists
     if (!user) {
-      console.log(id);
       return res.status(404).json({ message: "User not found" });
     }
 
