@@ -2,8 +2,10 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+// routes
 const productRoute = require("./routes/products.route.js");
 const authRoute = require("./routes/auth.route.js");
+const categoryRoute = require("./routes/categories.route.js")
 const cors = require("cors");
 
 const app = express();
@@ -15,8 +17,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use("/api/users", authRoute); // Protected product routes
-app.use("/api/products", productRoute); // Protected product routes
+app.use("/api/users", authRoute);
+app.use("/api/products", productRoute);
+app.use("/api/categories", categoryRoute);
 
 // Database Connection
 mongoose
