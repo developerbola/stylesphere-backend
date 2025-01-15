@@ -8,7 +8,6 @@ const getAllProducts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 const getSingleProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -19,6 +18,14 @@ const getSingleProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+const getHeroProducts = async (req, res) => {
+  try {
+    const products = await Product.find().limit(2);
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -42,7 +49,6 @@ const deleteProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -59,6 +65,7 @@ const updateProduct = async (req, res) => {
 module.exports = {
   getAllProducts,
   getSingleProduct,
+  getHeroProducts,
   createProduct,
   deleteProduct,
   updateProduct,
