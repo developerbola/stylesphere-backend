@@ -9,17 +9,19 @@ const {
   addProductToUserCart,
   deleteProductFromUserCart,
   getUserData,
+  updateUser,
 } = require("../controllers/auth.controller");
 const authMiddleware = require("../middleware/auth");
 
 router.get("/", getAllUsers);
 router.get("/user", authMiddleware, getUserData);
-router.get("/:id", getUserData);
-router.put("/:id/cart", addProductToUserCart);
-router.delete("/:id/cart/:productId", deleteProductFromUserCart);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logOutUser);
-router.delete("/deleteUser/:id", deleteUser);
+router.delete("/:id", deleteUser);
+router.put("/:id", updateUser);
+// === CART ===
+router.put("/:id/cart", addProductToUserCart);
+router.delete("/:id/cart/:productId", deleteProductFromUserCart);
 
 module.exports = router;
