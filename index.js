@@ -7,6 +7,7 @@ const productRoute = require("./routes/products.route.js");
 const authRoute = require("./routes/auth.route.js");
 const categoryRoute = require("./routes/categories.route.js");
 const makeStyleRoute = require("./routes/make-style.route.js");
+const checkOuts = require("./routes/checkout.route.js");
 const cors = require("cors");
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api/users", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/make-style", makeStyleRoute);
+app.use("/api/checkouts", checkOuts);
 
 // Database Connection
 mongoose
